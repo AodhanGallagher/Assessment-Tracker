@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+  {% block content %}
+    <!-- Container used to display everything beneath the nav bar -->
+    <div class="container">
+      <div class="row justify-content-center my-3">
+        <h1 class="text-white font-weight-bold">Completed Assessments</h1> <!-- Header of the page -->
+      </div>
+      <!-- div used to contain the table and card that houses the table -->
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card bg-dark shadow-2-strong" style="border-radius: .5rem;">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-borderless mb-0 table-hover text-white">
+                  <!-- Table header row and it's columns -->
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Module Code</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Deadline</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <!-- Table body that is dynaically updated with the contents of the database -->
+                  <tbody>
+                    {% for item in items %}
+                    <tr>
+                      <td>{{item[1]}}</td>
+                      <td>{{item[2]}}</td>
+                      <td>{{item[4]}}</td>
+                      <td>{{item[3]}}</td>
+                      <td class="d-flex justify-content-center">
+                        <!-- Button used to remove entry from the database / table -->
+                        <form action="{{ url_for('delete') }}" method="post">
+                          <input type="hidden" name="delete" value="{{ item.id }}"/>
+                          <input type="submit" class="btn mb-0 btn-xs btn-secondary" value="Delete"/>
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

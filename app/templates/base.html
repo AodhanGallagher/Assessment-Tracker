@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+      <!-- Handles the title of the current page being displayed -->
+      {% if title %}
+        <title>{{ title }}</title>
+      {% else %}
+        <title> No title specified</title>
+      {% endif %}
+    </head>
+
+    <body style="background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))">
+      <!-- Navigation bar -->
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Assessment Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">All Assessments <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/completed_assessments">Completed Assessments</a></li>
+            <li class="nav-item"><a class="nav-link" href="/incomplete_assessments">Incomplete Assessments</a></li>
+          </ul>
+          <!-- Button used to trigger the modal for adding assignments -->
+          <form class="d-flex">
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addModal">Add Assessment</button>
+          </form>
+        </div>
+      </nav>
+
+      <!-- Modal used for adding assignments -->
+      <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <!-- Modal header for the title and exit button -->
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add an Assessment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- Modal body used to contain the relevant form fields and button -->
+            <div class="modal-body">
+              <form form action="" method="post" name="assessment">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                  {{ form.titleField.label }}
+                  {{ form.titleField(class_="form-control", placeholder_="Enter the assessment title") }}
+                </div>
+                <div class="form-group">
+                  {{ form.moduleField.label }}
+                  {{ form.moduleField(class_="form-control", placeholder_="Enter the module code") }}
+                </div>
+                <div class="form-group">
+                  {{ form.deadlineField.label }}
+                  {{ form.deadlineField(class_="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.descriptionField.label }}
+                  {{ form.descriptionField(class_="form-control", placeholder_="Enter a description of the assessment", rows_="3") }}
+                </div>
+                <div class="form-check">
+                  {{ form.completeField(class_="form-check-input", type_="checkbox") }}
+                  {{ form.completeField.label(class_="form-check-label") }}
+                </div>
+                {{ form.submitField(class_="btn btn-primary float-right") }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block content that will be changed on each page of the application -->
+      <div class="d-flex justify-content-center">
+        {% block content %}{% endblock %}
+      </div>
+
+      <!-- Additional JavaScript -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    </body>
+  </html>
